@@ -2,7 +2,7 @@
 
 ## Comet chat dependencies
 
-in prohect level build.gradle file:
+in project level build.gradle file:
 
 ```kotlin
 allprojects {

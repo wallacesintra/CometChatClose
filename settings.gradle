@@ -18,13 +18,10 @@ dependencyResolutionManagement {
         mavenCentral()
 
         maven {
-            // specify the url of the maven repository
-//            url = uri("https://repo.maven.apache.org/maven2")
-            url = uri("https://dl.cloudsmith.io/public/cometchat/cometchat/maven/")
+            url "https://dl.cloudsmith.io/public/cometchat/cometchat/maven/"
         }
     }
 }
 
 rootProject.name = "CometChatClose"
-include(":app")
- 
+include ':app'
