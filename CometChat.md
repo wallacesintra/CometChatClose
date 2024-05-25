@@ -42,20 +42,25 @@ dependencies {
     * overrideClientHost(clientHost: string): takes the client URL as input and uses this client URL instead of the default client URL. This can be used in case of dedicated deployment of CometChat.
 
 ```kotlin
-val authKey = "AUTH_KEY" // Replace with your App Auth Key
-val user = User()
-user.uid = "user1" // Replace with the UID for the user to be created
-user.name = "Kevin" // Replace with the name of the user
+val appID:String="APP_ID" // Replace with your App ID
+val region:String="REGION" // Replace with your App Region ("eu" or "us")
 
-CometChat.createUser(user, authKey, object : CometChat.CallbackListener<User>() {
-  override fun onSuccess(user: User) {
-    Log.d("createUser", user.toString()
+val appSettings = AppSettings.AppSettingsBuilder()
+  .subscribePresenceForAllUsers()
+  .setRegion(region)
+  .autoEstablishSocketConnection(true)
+  .build()  
+
+CometChat.init(this,appID,appSettings, object : CometChat.CallbackListener<String>() {
+ override fun onSuccess(p0: String?) {
+    Log.d(TAG, "Initialization completed successfully")
   }
 
-  override fun onError(e: CometChatException) {
-    Log.e("createUser", e.message)
+  override fun onError(p0: CometChatException?) {
+    Log.d(TAG, "Initialization failed with exception: " + p0?.message)
   }
-})
+  
+ })
 ```
 
 ### Register and Login user
@@ -71,7 +76,7 @@ user.name = "Kevin" // Replace with the name of the user
 
 CometChat.createUser(user, authKey, object : CometChat.CallbackListener<User>() {
   override fun onSuccess(user: User) {
-    Log.d("createUser", user.toString()
+    Log.d("createUser", user.toString())
   }
 
   override fun onError(e: CometChatException) {
